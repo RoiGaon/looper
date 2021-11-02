@@ -9,8 +9,18 @@ import KeyBoard from "./components/KeyBoard";
 const App = () => {
   const [playingAudio, setPlayingAudio] = React.useState([]);
   const [freeze, setFreeze] = React.useState(false);
+
   React.useEffect(() => {
-    playingAudio.forEach((audio) => (audio.currentTime = 0));
+    let time;
+    if (playingAudio.length > 0) {
+      let firstAudio = playingAudio[0];
+      time = firstAudio.duration - firstAudio.currentTime;
+    }
+    const timer = setTimeout(
+      () => playingAudio.forEach((audio) => (audio.currentTime = 0)),
+      time
+    );
+    return () => clearTimeout(timer);
   }, [playingAudio]);
 
   function addToAudio(audio) {
