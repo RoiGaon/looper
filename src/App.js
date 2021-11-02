@@ -9,7 +9,6 @@ import KeyBoard from "./components/KeyBoard";
 const App = () => {
   const [playingAudio, setPlayingAudio] = React.useState([]);
   const [freeze, setFreeze] = React.useState(false);
-
   React.useEffect(() => {
     playingAudio.forEach((audio) => (audio.currentTime = 0));
   }, [playingAudio]);

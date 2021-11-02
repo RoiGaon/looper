@@ -8,8 +8,10 @@ export const useAudio = (url) => {
   const toggle = () => setPlay(!play);
 
   React.useEffect(() => {
+    audio.playbackRate = 1.0;
+    audio.currentTime = 0;
     play ? audio.play() : audio.pause();
-    audio.loop = true;
+    audio.loop = play;
   }, [play, audio]);
 
   return [play, toggle, audio];
