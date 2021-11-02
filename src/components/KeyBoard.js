@@ -5,7 +5,7 @@ export const useAudio = (url) => {
   const [audio] = React.useState(new Audio(url));
   const [play, setPlay] = React.useState(false);
 
-  const toggle = () => setPlay(!play);
+  const toggle = (freeze) => setPlay(!play);
 
   React.useEffect(() => {
     audio.playbackRate = 1.0;
@@ -14,11 +14,17 @@ export const useAudio = (url) => {
     audio.loop = play;
   }, [play, audio]);
 
-  return [play, toggle, audio];
+  return [play, toggle, audio, setPlay];
 };
 
 const KeyBoard = ({ freeze, url, icon, addToAudio, removeFromAudio }) => {
-  const [play, toggle, audio] = useAudio(url);
+  const [play, toggle, audio, setPlay] = useAudio(url);
+
+  React.useEffect(() => {
+    if (freeze) {
+      setPlay(false);
+    }
+  }, [freeze, setPlay]);
 
   const set = () => {
     toggle();
