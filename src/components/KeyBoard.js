@@ -5,7 +5,7 @@ export const useAudio = (url) => {
   const [audio] = React.useState(new Audio(url));
   const [play, setPlay] = React.useState(false);
 
-  const toggle = (freeze) => setPlay(!play);
+  const toggle = () => setPlay(!play);
 
   React.useEffect(() => {
     audio.playbackRate = 1.0;
